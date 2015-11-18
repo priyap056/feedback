@@ -57,6 +57,11 @@ angular.module('starter.controllers', [])
         question: 'Suggestions to enhance the spa experience further',
         type: "textinputs",
         show: false
+      },
+      {
+        question:'User Detail',
+        type:'userDetail',
+        show:false
       }
     ];
 
@@ -74,7 +79,10 @@ angular.module('starter.controllers', [])
       if (isChecked) {
         question.answer.push(item.text);
       } else {
-        question.answer.splice(item.text);
+        var i = question.answer.indexOf(item.text);
+        if(i != -1) {
+          question.answer.splice(i, 1);
+        }
       }
     }
 
@@ -95,18 +103,7 @@ angular.module('starter.controllers', [])
   })
 
   .controller('ChatsCtrl', function ($scope, Chats) {
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
 
-    $scope.chats = Chats.all();
-    $scope.remove = function (chat) {
-      Chats.remove(chat);
-    };
   })
 
   .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {

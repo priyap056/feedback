@@ -1,54 +1,55 @@
 <ion-view view-title="Guest Feedback">
-  <ion-content class="padding">
-    <div flex ng-repeat="question in questions" class="content">
+  <ion-content class="padding backgroundimg">
+    <img src="\img\banner.jpg" style="max-height: 100%;max-width: 100%">
 
-      <div ng-show="question.show">
-        <div>
-          <label class="labelStyle">
-            <span>{{question.question}}</span>
-          </label>
+    <div ng-repeat="question in questions" class="content" ng-if="question.show">
+      <form name="feedbackForm">
+      <div>
+        <label class="labelStyle">
+          <span>{{question.question}}</span>
+        </label>
 
-          <div class="divMargin">
-            <div ng-if="question.type == 'textinputs' ">
-              <textarea ng-model="question.answer" rows="4" cols="50" placeholder="Enter your answer here"></textarea>
-            </div>
-            <div ng-if="question.type == 'multiselect' ">
-
-              <ion-checkbox ng-repeat="item in question.options" ng-model="isChecked"
-                            ng-click="onMultiSelect(question,item,isChecked)">{{item.text}}
-              </ion-checkbox>
-            </div>
-
-
-            <div ng-if="question.type == 'singleselect' ">
-              <ion-radio ng-repeat="value in question.options" ng-value="value" name="{{question.question}}"
-                         ng-model="question.answer">{{value}}
-              </ion-radio>
-            </div>
+        <div class="divMargin">
+          <div ng-if="question.type == 'textinputs' ">
+            <textarea ng-model="question.answer" style="height: 200px;width: 100%"
+                      placeholder="Enter your answer here"></textarea>
           </div>
-
-        </div>
-        <div class="btnDivStyle">
-          <button class="button icon-left ion-chevron-left button-calm buttonSize" ng-if="$index > 0"
-                  ng-click="onPrevious(question,$index)">
-            previous
-          </button>
-          <button class="button button-calm icon-left buttonSize" ng-if="$index == 0">
-            cancel
-          </button>
-          <button class="button icon-right ion-chevron-right button-calm rightButton buttonSize"
-                  ng-if="questions.length-1 != $index" ng-disabled="(!question.answer) || question.answer.length == 0"
-                  ng-click="onNext(question,$index)">
-            next
-          </button>
-          <button class="button button-calm icon-right rightButton buttonSize" ng-if="questions.length-1 == $index"
-                  ng-click="onSubmit()" ng-disabled="(!question.answer) || question.answer.length == 0">
-            submit
-          </button>
-
+          <div ng-if="question.type == 'multiselect' ">
+            <ion-checkbox ng-repeat="item in question.options" ng-model="isChecked"
+                          ng-click="onMultiSelect(question,item,isChecked)">{{item.text}}
+            </ion-checkbox>
+          </div>
+          <div ng-if="question.type == 'singleselect' ">
+            <ion-radio ng-repeat="value in question.options" ng-value="value" name="{{question.question}}"
+                       ng-model="question.answer">{{value}}
+            </ion-radio>
+          </div>
+          <div ng-if="question.type == 'userDetail' ">
+            <label class="item item-input">
+              <span class="input-label">Telephone</span>
+              <input type="tel" ng-model="question.answer.phone" name="phone" required ng-minlength="10">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Email</span>
+              <input type="email" ng-model="question.answer.email" name="email">
+            </label>
+          </div>
         </div>
       </div>
-
+      <div class="btnDivStyle">
+        <button class="button icon-left ion-chevron-left button-calm buttonSize" ng-if="$index > 0"
+                ng-click="onPrevious(question,$index)">Previous
+        </button>
+        <button class="button button-calm icon-left buttonSize" ng-if="$index == 0">Cancel</button>
+        <button class="button icon-right ion-chevron-right button-calm rightButton buttonSize"
+                ng-if="questions.length-1 != $index" ng-disabled="question.answer.phone ?question.answer.phone.length == 10 : (!question.answer) || question.answer.length < 1"
+                ng-click="onNext(question,$index)">Next
+        </button>
+        <button class="button button-calm icon-right rightButton buttonSize" ng-if="questions.length-1 == $index"
+                ng-click="onSubmit()" ng-disabled="feedbackForm.phone.$invalid || feedbackForm.email.$invalid">Submit
+        </button>
+      </div>
+      </form>
     </div>
   </ion-content>
 </ion-view>

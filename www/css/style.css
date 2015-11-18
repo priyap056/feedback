@@ -6,6 +6,9 @@ textarea {
   font-size: 18px;
   font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   font-weight: 500;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
 }
 
 .divMargin {
@@ -21,6 +24,7 @@ textarea {
   margin: auto;
   max-width: 500px;
   max-height: 1024px;
+  padding-top: 15px;
 }
 
 .buttonSize{
@@ -29,6 +33,30 @@ textarea {
 
 .btnDivStyle{
   position: absolute;
-  top: 400px;
+  padding-top: 15px;
   width: 100%;
+  margin-bottom: 20px;
+}
+.item-checkbox{
+  border: 0px;
+  background: transparent;
+}
+.item-radio{
+  border: 0px;
+  background: transparent;
+}
+.item-content{
+  border: 0px;
+  background: transparent !important;
+}
+.backgroundimg::after {
+  content: "";
+  background: url(../img/background.jpg);
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
