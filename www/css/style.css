@@ -1,0 +1,34 @@
+textarea {
+  border: 1px solid;
+}
+
+.labelStyle {
+  font-size: 18px;
+  font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-weight: 500;
+}
+
+.divMargin {
+  margin-top: 2%;
+}
+
+.rightButton {
+  position: absolute;
+  right: 0;
+}
+
+.content {
+  margin: auto;
+  max-width: 500px;
+  max-height: 1024px;
+}
+
+.buttonSize{
+  width: 49%;
+}
+
+.btnDivStyle{
+  position: absolute;
+  top: 400px;
+  width: 100%;
+}
