@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-  .controller('DashCtrl', function ($scope) {
+  .controller('DashCtrl',['$scope','$http','$location','$ionicPopup', function ($scope,$http,$location,$ionicPopup) {
     $scope.questions = [
       {
         question: 'My booking appointment experience (select all that apply)',
@@ -89,18 +89,50 @@ angular.module('starter.controllers', [])
     $scope.onSubmit = function () {
       console.log($scope.questions);
       var responses = [];
-
-      for (i = 0; i < $scope.questions.length; i++) {
+      var mailBody = '<div style="width: 500px;border:1px solid black;">'
+      for (i = 0; i < $scope.questions.length-1; i++) {
+        mailBody =mailBody+'<div style="background-color: #D9D9D9;height: 50px;text-align: center;vertical-align: middle;display: inline-block;width: 500px;;font-size: 16px;">'+$scope.questions[i].question+'</div><div style="height: 50px;padding: 5px;font-size: 14px;">'+$scope.questions[i].answer+'</div>'
         var response = {
           question: $scope.questions[i].question,
           answer: $scope.questions[i].answer
         };
         responses.push(response);
       }
+      mailBody = mailBody+'</div>'
 
-      console.log(responses);
+
+
+      $http({
+        method: "POST",
+        url: "https://mandrillapp.com/api/1.0/messages/send.json",
+        data: {
+          "key": '5SfGDLDXhDFotflAbyHAtQ',
+          "message": {
+            "from_email": "yogiswar_1987@yahoo.co.in",
+            "to": [
+              {
+                "email": "patil_pri056@yahoo.com",
+                "name": "Yogesh",
+                "type": "to"
+              }
+            ],
+            "autotext": "true",
+            "subject": "Feedback from"+ $scope.questions[$scope.questions.length-1].answer.email,
+            "html": mailBody
+          }
+        }
+      }).success(function(response) {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Feedback submit successful',
+          template: 'Thanks for the feedback',
+        });
+        alertPopup.then(function(res) {
+          $location.path('/chats');
+        });
+      });
     }
-  })
+  }])
+
 
   .controller('ChatsCtrl', function ($scope, Chats) {
 
