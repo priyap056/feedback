@@ -108,10 +108,10 @@ angular.module('starter.controllers', [])
         data: {
           "key": '5SfGDLDXhDFotflAbyHAtQ',
           "message": {
-            "from_email": "yogiswar_1987@yahoo.co.in",
+            "from_email": "yogiswar1987@gmail.com",
             "to": [
               {
-                "email": "patil_pri056@yahoo.com",
+                "email": "yogiswar1987@gmail.com",
                 "name": "Yogesh",
                 "type": "to"
               }
